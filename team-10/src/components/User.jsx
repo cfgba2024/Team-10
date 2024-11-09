@@ -27,6 +27,7 @@ const User = () => {
     ];
 
     const initialPriorityUsers = [];
+
     const [users, setUsers] = useState(initialUsers);
     const [priorityUsers, setPriorityUsers] = useState(initialPriorityUsers);
     const [isProfessional, setIsProfessional] = useState(false);
@@ -43,6 +44,43 @@ const User = () => {
             setError("Credenciales incorrectas. Inténtalo de nuevo.");
         }
     };
+
+    useEffect(() => {
+        const userIntervalId = setInterval(() => {
+            const newUser  = {
+                id: users.length + 1,
+                name: `Usuario ${users.length + 1}`,
+                age: 20 + (users.length % 10),
+                email: `usuario${users.length + 1}@gmail.com`,
+                current_services: "Psicólogo",
+                past_services: ["Psicología", "Terapia de Grupo"],
+                future_services: ["Farmacia", "Nutricionista"],
+                history_clinic: `Historia ${users.length + 1}`
+            };
+
+            setUsers(prevUsers => [...prevUsers, newUser ]);
+        }, 20000); // Agregar un nuevo usuario cada 20 segundos
+
+        const priorityUserIntervalId = setInterval(() => {
+            const newPriorityUser  = {
+                id: priorityUsers.length + 1,
+                name: `Prioritario ${priorityUsers.length + 1}`,
+                age: 20 + (priorityUsers.length % 10),
+                email: `prioritario${priorityUsers.length + 1}@gmail.com`,
+                current_services: "Psicólogo",
+                past_services: ["Psicología"],
+                future_services: ["Farmacia", "Cardiólogo"],
+                history_clinic: `Historia Prioritaria ${priorityUsers.length + 1}`
+            };
+
+            setPriorityUsers(prevPriorityUsers => [...prevPriorityUsers, newPriorityUser ]);
+        }, 20000); // Agregar un nuevo usuario prioritario cada 20 segundos
+
+        return () => {
+            clearInterval(userIntervalId);
+            clearInterval(priorityUserIntervalId);
+        };
+    }, [users, priorityUsers]);
 
     const handleNextPatient = () => {
         setUsers(prevUsers => {
@@ -89,7 +127,7 @@ const User = () => {
                                     onChange={(e) => setPassword(e.target.value)}
                                     required
                                     className={styles.input}
-                                />
+ />
                             </label>
                         </div>
                         <button type="submit">Iniciar Sesión</button>
@@ -100,6 +138,7 @@ const User = () => {
                 <div className={styles.userContainer}>
                     <div className={styles.userGroup}>
                         <h2>Usuarios Normales</h2>
+                            <button onClick={handleNextPatient}>Siguiente Usuario</button>
                         <div className={styles.userList}>
                             {users.map(user => (
                                 <div key={user.id} className={styles.user}>
@@ -113,16 +152,16 @@ const User = () => {
                                 </div>
                             ))}
                         </div>
-                        <button onClick={handleNextPatient}>Siguiente Usuario</button>
                     </div>
                     <div className={styles.priorityUserGroup}>
                         <h2>Usuarios Prioritarios</h2>
+                            <button onClick={handleNextPriorityPatient}>Siguiente Prioritario</button>
                         <div className={styles.priorityUserList}>
                             {priorityUsers.map(priorityUser  => (
                                 <div key={priorityUser .id} className={styles.priorityUser }>
                                     <h3>{priorityUser .name}</h3>
                                     <p>Email: {priorityUser .email}</p>
-                                    <p >Edad: {priorityUser .age}</p>
+                                    <p>Edad: {priorityUser .age}</p>
                                     <p>Servicios Actuales: {priorityUser .current_services}</p>
                                     <p>Servicios Pasados: {priorityUser .past_services.join(", ")}</p>
                                     <p>Servicios Futuros: {priorityUser .future_services.join(", ")}</p>
@@ -130,7 +169,6 @@ const User = () => {
                                 </div>
                             ))}
                         </div>
-                        <button onClick={handleNextPriorityPatient}>Siguiente Prioritario</button>
                     </div>
                 </div>
             )}

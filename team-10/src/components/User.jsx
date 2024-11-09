@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-unused-vars
 import React, { useState, useEffect } from "react";
-import styles from "./User.module.css"; // Asegúrate de que la ruta sea correcta
+import styles from "./User.module.css";
 
 const User = () => {
     const initialUsers = [
@@ -10,8 +10,9 @@ const User = () => {
             age: 25,
             email: "natalia@gmail.com",
             current_services: "Psicólogo",
+            past_services: ["Psicología", "Terapia de Grupo"],
             future_services: ["Farmacia", "Nutricionista"],
-            history_clinic: "Historia 1" // Campo nuevo
+            history_clinic: "Historia 1"
         },
         {
             id: 2,
@@ -19,133 +20,120 @@ const User = () => {
             age: 30,
             email: "juan@gmail.com",
             current_services: "Psicólogo",
+            past_services: ["Psicología"],
             future_services: ["Farmacia", "Cardiólogo"],
-            history_clinic: "Historia 2" // Campo nuevo
+            history_clinic: "Historia 2"
         }
     ];
 
-    const initialPriorityUsers = []; // Inicializa la lista de usuarios prioritarios
-
+    const initialPriorityUsers = [];
     const [users, setUsers] = useState(initialUsers);
-    const [priorityUsers, setPriorityUsers] = useState(initialPriorityUsers); // Estado para usuarios prioritarios
-    const [animate, setAnimate] = useState(false); // Estado para manejar la animación
+    const [priorityUsers, setPriorityUsers] = useState(initialPriorityUsers);
+    const [isProfessional, setIsProfessional] = useState(false);
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState("");
 
-    useEffect(() => {
-        const userIntervalId = setInterval(() => {
-            const newUser  = {
-                id: users.length + 1,
-                name: `Usuario ${users.length + 1}`,
-                age: 20 + (users.length % 10), // Edad aleatoria entre 20 y 29
-                email: `usuario${users.length + 1}@gmail.com`,
-                current_services: "Psicólogo",
-                future_services: ["Farmacia", "Nutricionista", "Cardiólogo"],
-                history_clinic: `Historia ${users.length + 1}` // Campo nuevo
-            };
+    const handleLogin = (event) => {
+        event.preventDefault();
+        if (username === "admin" && password === "1234") {
+            setIsProfessional(true);
+            setError("");
+        } else {
+            setError("Credenciales incorrectas. Inténtalo de nuevo.");
+        }
+    };
 
-            setAnimate(true); // Activa la animación
-            setUsers(prevUsers => [...prevUsers,newUser ]); // Agrega el nuevo usuario al principio de la lista
-
-            setTimeout(() => {
-                setAnimate(false); // Desactiva la animación después de 500ms
-            }, 500);
-        }, 20000); // 20 segundos para usuarios normales
-
-        const priorityUserIntervalId = setInterval(() => {
-            const newPriorityUser  = {
-                id: priorityUsers.length + 1,
-                name: `Prioritario ${priorityUsers.length + 1}`,
-                age: 20 + (priorityUsers.length % 10), // Edad aleatoria entre 20 y 29
-                email: `prioritario${priorityUsers.length + 1}@gmail.com`,
-                current_services: "Psicólogo",
-                future_services: ["Farmacia", "Nutricionista"],
-                history_clinic: `Historia Prioritaria ${priorityUsers.length + 1}` // Campo nuevo
-            };
-
-            setAnimate(true); // Activa la animación
-            setPriorityUsers(prevPriorityUsers => [...prevPriorityUsers,newPriorityUser]); // Agrega el nuevo usuario prioritario
-
-            setTimeout(() => {
-                setAnimate(false); // Desactiva la animación después de 500ms
-            }, 500);
-        }, 20000); // 20 segundos para usuarios prioritarios
-
-        return () => {
-            clearInterval(userIntervalId); // Limpia el intervalo de usuarios normales al desmontar el componente
-            clearInterval(priorityUserIntervalId); // Limpia el intervalo de usuarios prioritarios al desmontar el componente
-        };
-    }, [users, priorityUsers]);
-
-    // Función para eliminar el primer usuario de la lista de usuarios normales
     const handleNextPatient = () => {
         setUsers(prevUsers => {
             if (prevUsers.length > 0) {
-                return prevUsers.slice(1); // Elimina el primer usuario
+                return prevUsers.slice(1);
             }
-            return prevUsers; // Si no hay usuarios, no hace nada
+            return prevUsers;
         });
     };
 
-    // Función para eliminar el primer usuario de la lista de usuarios prioritarios
     const handleNextPriorityPatient = () => {
         setPriorityUsers(prevPriorityUsers => {
             if (prevPriorityUsers.length > 0) {
-                return prevPriorityUsers.slice(1); // Elimina el primer usuario prioritario
+                return prevPriorityUsers.slice(1);
             }
-            return prevPriorityUsers; // Si no hay usuarios prioritarios, no hace nada
+            return prevPriorityUsers;
         });
     };
 
     return (
         <div className={styles.container}>
-            <div className={styles.userGroup}>
-                < h2>Usuarios Normales</h2>
-                <button onClick={handleNextPatient}>Siguiente Paciente</button> {/* Botón para siguiente paciente */}
-                <div className={styles.userList}>
-                    {users.map(user => (
-                        <div key={user.id} className={`${styles.user} ${animate ? styles.enter : ''}`}>
-                            <h3>{user.name}</h3>
-                            <p>Edad: {user.age}</p>
-                            <p>Email: {user.email}</p>
-                            <p>Servicios actuales: {user.current_services}</p>
-                            <p>Historia Clínica: {user.history_clinic}</p> {/* Mostrar historia clínica */}
-                            <div className={styles.futureService}>
-                                <h4>Servicios futuros:</h4>
-                                <ul>
-                                    {user.future_services.map((service, index) => (
-                                        <li key={index}>{service}</li>
-                                    ))}
-                                </ul>
-                            </div>
+            {!isProfessional ? (
+                <div className={styles.loginContainer}>
+                    <h2>Iniciar Sesión</h2>
+                    <form onSubmit={handleLogin}>
+                        <div>
+                            <label>
+                                Usuario:
+                                <input
+                                    type="text"
+                                    value={username}
+                                    onChange={(e) => setUsername(e.target.value)}
+                                    required
+                                    className={styles.input}
+                                />
+                            </label>
                         </div>
-                    ))}
-                </div>
-               
-            </div>
-
-            <div className={styles.userGroup}>
-                <h2>Usuarios Prioritarios</h2>
-                <button onClick={handleNextPriorityPatient}>Siguiente Paciente Prioritario</button> {/* Botón para siguiente paciente prioritario */}
-                <div className={styles.userList}>
-                    {priorityUsers.map(priorityUser  => (
-                        <div key={priorityUser .id} className={`${styles.user} ${animate ? styles.enter : ''}`}>
-                            <h3>{priorityUser .name}</h3>
-                            <p>Edad: {priorityUser .age}</p>
-                            <p>Email: {priorityUser .email}</p>
-                            <p>Servicios actuales: {priorityUser .current_services}</p>
-                            <p>Historia Clínica: {priorityUser .history_clinic}</p> {/* Mostrar historia clínica */}
-                            <div className={styles.futureService}>
-                                <h4>Servicios futuros:</h4>
-                                <ul>
-                                    {priorityUser .future_services.map((service, index) => (
-                                        <li key={index}>{service}</li>
-                                    ))}
-                                </ul>
-                            </div>
+                        <div>
+                            <label>
+                                Contraseña:
+                                <input
+                                    type="password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    required
+                                    className={styles.input}
+                                />
+                            </label>
                         </div>
-                    ))}
+                        <button type="submit">Iniciar Sesión</button>
+                        {error && <div className={styles.error}>{error}</div>}
+                    </form>
                 </div>
-                
-            </div>
+            ) : (
+                <div className={styles.userContainer}>
+                    <div className={styles.userGroup}>
+                        <h2>Usuarios Normales</h2>
+                        <div className={styles.userList}>
+                            {users.map(user => (
+                                <div key={user.id} className={styles.user}>
+                                    <h3>{user.name}</h3>
+                                    <p>Email: {user.email}</p>
+                                    <p>Edad: {user.age}</p>
+                                    <p>Servicios Actuales: {user.current_services}</p>
+                                    <p>Servicios Pasados: {user.past_services.join(", ")}</p>
+                                    <p>Servicios Futuros: {user.future_services.join(", ")}</p>
+                                    <p>Historia Clínica: {user.history_clinic}</p>
+                                </div>
+                            ))}
+                        </div>
+                        <button onClick={handleNextPatient}>Siguiente Usuario</button>
+                    </div>
+                    <div className={styles.priorityUserGroup}>
+                        <h2>Usuarios Prioritarios</h2>
+                        <div className={styles.priorityUserList}>
+                            {priorityUsers.map(priorityUser  => (
+                                <div key={priorityUser .id} className={styles.priorityUser }>
+                                    <h3>{priorityUser .name}</h3>
+                                    <p>Email: {priorityUser .email}</p>
+                                    <p >Edad: {priorityUser .age}</p>
+                                    <p>Servicios Actuales: {priorityUser .current_services}</p>
+                                    <p>Servicios Pasados: {priorityUser .past_services.join(", ")}</p>
+                                    <p>Servicios Futuros: {priorityUser .future_services.join(", ")}</p>
+                                    <p>Historia Clínica: {priorityUser .history_clinic}</p>
+                                </div>
+                            ))}
+                        </div>
+                        <button onClick={handleNextPriorityPatient}>Siguiente Prioritario</button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

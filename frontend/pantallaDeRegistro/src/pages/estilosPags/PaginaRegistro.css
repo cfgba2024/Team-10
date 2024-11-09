@@ -1,0 +1,55 @@
+.contenedor-registro{
+    height: 100vh;
+    width: 100.8vw;
+    background-image: linear-gradient(to right bottom, #e83b4d, #e83b4d, #e83b4d, #e83b4d, #e83b4d, #e83b4d, #e83b4d, #bfaaff, #ac8eff, #9a72ffe5, #8453ffc3, #6f2dffa1);
+    /* background: rgb(239,235,249);
+    background: -moz-linear-gradient(172deg, rgba(239,235,249,1) 11%, rgba(217,206,255,1) 100%);
+    background: -webkit-linear-gradient(172deg, rgba(239,235,249,1) 11%, rgba(217,206,255,1) 100%);
+    background: linear-gradient(172deg, rgba(239,235,249,1) 11%, rgba(217,206,255,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#efebf9",endColorstr="#e83b4d",GradientType=1); */
+}
+
+.contenedor-registro button{
+    padding: 1rem 3rem;
+    border-radius: 10px;
+    background-color: rgba(240, 248, 255, 0);
+
+
+}
+
+.btn-estudiante{
+    border: 3px solid #e83b4d;
+    color: #e83b4d;
+}
+
+.btn-docente{
+    background-color: #fff8f6;
+    border: 3px solid #fff8f6;
+    color: #fff8f6;
+}
+
+.btn-estudiante:hover{
+    background-color: #6e46ff;
+    border: 3px solid #6e46ff;
+    color: #ffffff;
+    box-shadow: rgba(136, 0, 255, 0.56) 0px 22px 70px 4px;
+}
+
+.btn-docente:hover{
+    background-color: #1c42ff;
+    border: 3px solid #1c42ff;
+    color: #ffffff;
+    box-shadow: rgba(17, 0, 255, 0.56) 0px 22px 70px 4px;
+}
+
+.formulario-registro{
+  padding: 2rem 10rem;
+}
+
+.eleccion-registro{
+  margin-top: 30vh;
+}
+
+.eleccion-registro button{
+  margin: 2rem;
+}

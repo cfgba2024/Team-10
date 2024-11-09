@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+.contenido-principal-alumno{
+    box-sizing: border-box;
+    font-size: 16px;
+    color:rgb(17, 17, 17);
+    font-family: "Inter", sans-serif;
+}
+.contenidoCol{
+    margin: 0px;
+    padding: 0px;
+}
+
+
+.row{
+    width: 100vw;
+}
+
+/*!!!! card naranja */
+.bloqueConecta{
+    background-color: #fff8f6; /* Color de fondo principal */
+    background-image: url('../../public/fondo-destello.svg');
+    background-size: 149px 150px; /* Tamaño del SVG */
+    background-repeat: no-repeat; /* Evita la repetición del fondo */
+    background-position: 97% 50%; /* Posición del SVG dentro del contenedor */
+    margin: 2em;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1em;
+}
+
+.subtituloConecta{
+    font-size: 0.6em;
+    margin-bottom: 0px;
+    color: rgb(247, 241, 241);
+}
+h1.tituloConecta{
+    font-size: 1em;
+    text-align: left;
+    width: 100%;
+    margin:6px 0 1em 0 ;
+    color: rgb(247, 241, 241);
+}
+button.botonConecta{
+    background-color: black;
+    border-radius: 10px;
+    border: none;
+    font-size: 0.6em;
+    padding: 5px 10px 5px 10px;
+    color: rgb(247, 241, 241);
+
+}
+
+/*!!!! card profes y recordatorios */
+section.contenedorCards{
+    font-size: 1em;
+    color:black;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin: 0 1em 0 1em;
+    height: 400px; /* Ajusta según sea necesario */
+    overflow-y: auto;
+}
+.contenedorCards::-webkit-scrollbar {
+    width: 12px; 
+    height: 12px; 
+  }
+
+article.cardNotificacion{
+    display: grid;
+    margin: 5px 1em 5px 1em;
+    background-color: rgb(247, 242, 247);
+    box-shadow: 1px 3px 10px rgb(175, 174, 174);
+    padding: 0.5em;
+    border-radius: 8px;  
+}
+/* card profes */
+article.profesores{
+    grid-template-columns: 1fr 2fr 1fr;  
+}
+
+h2.titulo-profesores{
+    grid-column-start: 1;
+    grid-column-end: 3;
+    align-self: center;
+    font-size: 0.8em;
+    
+}
+img.imagen-profesores{
+    border-radius: 50%;
+    width: 4em;
+    height: auto;
+    
+    justify-self:flex-start;
+}
+p.cursoCard{
+    align-self: center;
+    font-size: 0.8em;
+    justify-self: flex-start;
+    margin: 0 0 0 5px;
+}
+
+/* ____________botones tres puntos______________________ */
+.btn-outline-light{
+   
+    border: none;
+    align-self:flex-start;
+    justify-self: flex-end;
+    margin-top: 0;
+    color:black;
+    height: 1.5rem;
+    border-radius: 50%;
+}
+.btn:hover, .btn:active{
+    color: rgb(139, 137, 139);
+    background-color: transparent;
+}
+
+/* ___________card recordatorios_____________________ */
+article.recordatorios{
+    grid-template-columns: 1fr 3fr 1fr ;
+    height: 6em;
+}
+
+.contenido-principal-alumno h2, p{
+    justify-self: flex-start;
+    margin-bottom: 0px;
+    align-self: flex-start;
+    font-size: 0.8em;
+}
+
+p.linea-recordatorio{
+    grid-column-start: 2;
+    grid-column-end: 4;}
+
+
+.contenido-principal-alumno span{
+    display: grid;
+    grid-template-columns: 1fr 1fr ; 
+    margin: 0 1em 0 2em;
+    padding: 0 0 1em 0;
+}
+.titulo-recordatorio{
+    grid-column-start: 1;
+    grid-column-end: 3;  
+}
+.icono-campana{
+    width: 1.5em;
+    height: auto;
+    justify-self: center;
+    align-self: start;
+    padding-top: 5px;
+    grid-row-start: 2;
+    grid-row-end: 4;
+
+}

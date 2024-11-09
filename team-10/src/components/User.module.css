@@ -1,0 +1,53 @@
+.userList {
+    display: flex;
+    flex-direction: column; /* Coloca los elementos uno debajo del otro */
+    gap: 10px; /* Espacio entre los usuarios */
+}
+
+.user {
+    padding: 10px;
+    border: 1px solid #ccc; /* Borde para cada usuario */
+    border-radius: 5px; /* Bordes redondeados */
+    background-color: #fff8f6; /* Color de fondo */
+}
+
+.pastService {
+    color: gray; /* Color gris para servicios pasados */
+}
+
+.currentService {
+    color: black; /* Color negro para servicios actuales */
+}
+
+.futureService {
+    color: green; /* Color verde para servicios futuros */
+}
+.h2{
+    color: #e83b4d;
+}
+
+.futureService ul {
+    list-style-type: none; /* Cambia el tipo de viñeta a círculo */
+    padding-left: 0; /* Elimina el padding a la izquierda */
+}
+
+.futureService li {
+    margin: 0; /* Elimina el margen entre los elementos de la lista */
+    padding-left: 1em; /* Añade espacio a la izquierda para que el texto no esté pegado al círculo */
+    position: relative; /* Permite posicionar el círculo */
+}
+
+.container {
+    display: flex;
+    justify-content: space-between; /* Espacio entre los grupos de usuarios */
+}
+
+.userGroup {
+    flex: 1; /* Cada grupo ocupa el mismo espacio */
+    margin: 10px; /* Espaciado entre los grupos */
+}
+
+.userList {
+    display: flex;
+    flex-direction: column; /* Mantiene la lista de usuarios en columna */
+}
